@@ -28,13 +28,9 @@ delete_student_record() {
 
 # updating a student record by ID
 update_student_record() {
-    echo "Enter student ID to update:"
-    read id
-
-    echo "Enter updated student email:"
-    read email
-    echo "Enter updated student age:"
-    read age
+    read -p "Enter student email:" email
+    read -p "Enter student age:" age
+    read -p "Enter student ID:" id
 
     sed -i "s/^.*,$id$/$email,$age,$id/" students-list_1023.txt
     echo "Student record with ID $id updated successfully."
