@@ -1,5 +1,7 @@
 #!/bin/bash
 
+STUDENTS_FILE="students-list_1023.txt"
+
 while true; do
     echo "1. Create student record"
     echo "2. View all students"
@@ -8,6 +10,8 @@ while true; do
     echo "5. Exit"
     read -p "Enter your choice (1-5): " choice
 
+    echo  # Empty line for separation
+
     case $choice in
         1)  # Create student record
             read -p "Enter student email: " email
@@ -15,17 +19,17 @@ while true; do
             read -p "Enter student ID: " student_id
 
             # Check for existing records with the same email or student ID
-            if grep -E "^$email\s|\s$student_id$" students-list_1023.txt > /dev/null; then
+            if grep -E "^$email\s|\s$student_id$" "$STUDENTS_FILE" > /dev/null; then
                 echo "Student record with the same email or student ID already exists. Cannot create duplicate records."
             else
-                echo "$email $age $student_id" >> students-list_1023.txt
+                echo "$email $age $student_id" >> "$STUDENTS_FILE"
                 echo "Student record created and saved."
             fi
             ;;
 
         2)  # View all students
-            if [ -s "students-list_1023.txt" ]; then
-                cat students-list_1023.txt
+            if [ -s "$STUDENTS_FILE" ]; then
+                cat "$STUDENTS_FILE"
                 echo  # Empty line for separation
             else
                 echo "No students found."
@@ -34,7 +38,7 @@ while true; do
 
         3)  # Delete student record
             read -p "Enter student ID to delete: " delete_id
-            sed -i "/^$delete_id\s/d" students-list_1023.txt
+            sed -i "/^$delete_id\s/d" "$STUDENTS_FILE"
             echo "Student record with ID $delete_id deleted."
             ;;
 
@@ -43,8 +47,8 @@ while true; do
             read -p "Enter new email: " new_email
             read -p "Enter new age: " new_age
 
-            # Remove old email and update with the new one
-            sed -i "/^$update_id\s/s/^\S*\s/$new_email $new_age /" students-list_1023.txt
+            # Update the entire line
+            sed -i "/^$update_id\s/c$new_email $new_age $update_id" "$STUDENTS_FILE"
             echo "Student record with ID $update_id updated."
             ;;
 
