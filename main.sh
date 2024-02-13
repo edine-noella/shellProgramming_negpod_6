@@ -19,8 +19,7 @@ view_all_students() {
 
 # deleting a student record by ID
 delete_student_record() {
-    echo "Enter student ID to delete:"
-    read id
+    read -p "Enter student ID to delete:" id
 
     sed -i "/^.*,$id$/d" students-list_1023.txt
     echo "Student record with ID $id deleted successfully."
