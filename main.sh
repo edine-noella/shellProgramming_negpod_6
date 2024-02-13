@@ -3,14 +3,16 @@
 STUDENTS_FILE="students-list_1023.txt"
 
 while true; do
+    echo  
+    echo "Student Management System"
+    echo "-------------------------"
     echo "1. Create student record"
     echo "2. View all students"
     echo "3. Delete student record"
     echo "4. Update student record"
     echo "5. Exit"
     read -p "Enter your choice (1-5): " choice
-
-    echo  # Empty line for separation
+    echo  
 
     case $choice in
         1)  # Create student record
@@ -38,7 +40,7 @@ while true; do
 
         3)  # Delete student record
             read -p "Enter student ID to delete: " delete_id
-            sed -i "/^$delete_id\s/d" "$STUDENTS_FILE"
+            awk -v id="$delete_id" '$3 != id' "$STUDENTS_FILE" > tmpfile && mv tmpfile "$STUDENTS_FILE"
             echo "Student record with ID $delete_id deleted."
             ;;
 
@@ -48,7 +50,7 @@ while true; do
             read -p "Enter new age: " new_age
 
             # Update the entire line
-            sed -i "/^$update_id\s/c$new_email $new_age $update_id" "$STUDENTS_FILE"
+            awk -v id="$update_id" -v email="$new_email" -v age="$new_age" '{if ($3 == id) print email, age, id; else print}' "$STUDENTS_FILE" > tmpfile && mv tmpfile "$STUDENTS_FILE"
             echo "Student record with ID $update_id updated."
             ;;
 
@@ -62,3 +64,4 @@ while true; do
             ;;
     esac
 done
+
