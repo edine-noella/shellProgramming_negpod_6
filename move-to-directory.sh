@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create the directory name
-directory_name="negpod_id-q1"
+directory_name="negpod_6-q1"
 
 # Check if the directory already exists, if not, create it
 if [ ! -d "$directory_name" ]; then
