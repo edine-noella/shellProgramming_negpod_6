@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 STUDENTS_FILE="students-list_1023.txt"
@@ -30,7 +31,9 @@ while true; do
             ;;
 
         2)  # View all students
-            if [ -s "$STUDENTS_FILE" ]; then
+            if [ -s "$STUDENTS_FILE" ]; then 
+		echo "list"
+		echo "---------"
                 cat "$STUDENTS_FILE"
                 echo  # Empty line for separation
             else
