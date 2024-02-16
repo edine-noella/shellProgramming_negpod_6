@@ -43,18 +43,32 @@ while true; do
 
         3)  # Delete student record
             read -p "Enter student ID to delete: " delete_id
+            
+	    if grep -wq "$delete_id" "$STUDENTS_FILE"; then
             awk -v id="$delete_id" '$3 != id' "$STUDENTS_FILE" > tmpfile && mv tmpfile "$STUDENTS_FILE"
-            echo "Student record with ID $delete_id deleted."
-            ;;
+            echo
+	    echo "Student record with ID $delete_id deleted."
+    else
+	    echo 
+	    echo "Student record with ID $delete_id is not found"
+	    fi
+	    ;;
 
         4)  # Update student record
             read -p "Enter student ID to update: " update_id
+	    
+	    if grep -wq "$update_id" "$STUDENTS_FILE"; then
             read -p "Enter new email: " new_email
             read -p "Enter new age: " new_age
 
             # Update the entire line
-            awk -v id="$update_id" -v email="$new_email" -v age="$new_age" '{if ($3 == id) print email, age, id; else print}' "$STUDENTS_FILE" > tmpfile && mv tmpfile "$STUDENTS_FILE"
+            
+             awk -v id="$update_id" -v email="$new_email" -v age="$new_age" '{if ($3 == id) print email, age, id; else print}' "$STUDENTS_FILE" > tmpfile && mv tmpfile "$STUDENTS_FILE"
             echo "Student record with ID $update_id updated."
+    else
+	    echo
+	    echo "Student record with ID $update_id is not found"
+	    fi
             ;;
 
         5)  # Exit the application
