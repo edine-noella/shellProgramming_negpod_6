@@ -4,6 +4,7 @@
 -Unix/Linux CLI
 **Detailed Explanation of the repository:**
 This repository contains **four(4)** sub-applications
+
 **1. The student registration application**
 This app allows users to perform CRUD activities on the file containing a list of students:students-list_1023.txt.
 
