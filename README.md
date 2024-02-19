@@ -3,7 +3,7 @@
 **Requirements:**
 -Unix/Linux CLI
 **Detailed Explanation of the repository:**
-This repository contains 4 sub-applications
+This repository contains **four(4)** sub-applications
 **1. The student registration application**
 This app allows users to perform CRUD activities on the file containing a list of students:students-list_1023.txt.
 
@@ -13,7 +13,7 @@ Only the following data is recorded on a student:
 -Unique student ID
 -Unique Student email
 -Student age
-To update or delete a student row, you need to know their ID
+_To update or delete a student row, you need to know their ID_
 
 **2. Student email application**
 The application allows users to save a separate file of the student in a file called student-emails.txt
